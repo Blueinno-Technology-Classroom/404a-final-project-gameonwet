@@ -15,7 +15,6 @@ leaf_CD = 0
 prev_mouse_pos = [0, 0]
 
 leaf_num = 15
-
 blow_range = 150
 blow_power = 10
 
