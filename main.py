@@ -21,6 +21,9 @@ blow_power = 10
 
 leaf_money = 0
 
+range_btn = Actor("range_btn")
+range_btn.scale = 0.2
+
 def update():
     global leaf_CD
     global leaf_money
@@ -31,9 +34,9 @@ def update():
     leaf_CD += 1
     if leaf_CD >= 240:
         for i in range(leaf_num):
-            leaf = Actor("leaf")
-            leaf.final_size = random.randint(5, 9) / 10
-            leaf.scale = leaf.final_size / 2
+            leaf = Actor("leaf_shadow")
+            leaf.scale = random.randint(5,9)/10
+
             leaf.x = random.randint(0, WIDTH)
             leaf.y = random.randint(0, HEIGHT)
             leaf.pe = 0
@@ -93,6 +96,7 @@ def on_mouse_move(pos):
 def draw():
     screen.clear()
     screen.blit('bg', (0, 0))
+    range_btn.draw()
 
     player.draw()
     for leaf in leaves:
