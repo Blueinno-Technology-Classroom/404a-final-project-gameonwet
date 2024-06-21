@@ -48,7 +48,22 @@ def update():
     global blow_power
     global leaf_num
 
-
+    if leaf_money >= range_btn.cost:
+        range_btn.iamge = 'range_btn'
+    else:
+        range_btn.iamge = 'range_btn_off'
+    
+    if leaf_money >= power_btn.cost:
+        power_btn.iamge = 'power_btn'
+    else:
+        power_btn.iamge = 'power_btn_off'
+        
+    if leaf_money >= add_leaf_btn.cost:
+        add_leaf_btn.iamge = 'add_leaf_btn'
+    else:
+        add_leaf_btn.iamge = 'add_leaf_btn_off'
+        
+    
     leaf_CD += 1
     if leaf_CD >= 240:
         for i in range(leaf_num):
@@ -110,17 +125,27 @@ def on_mouse_move(pos):
     prev_mouse_pos[1] = pos[1]
     
 def on_mouse_down(pos):
+    global leaf_money
+    global blow_range
+    global blow_power
+    global leaf_num
     if HEIGHT-50<pos[1]<HEIGHT:
-        if 0<pos[0]<100:
+        if 0<pos[0]<100 and leaf_money>= range_btn.cost:
             print(f'{pos}, clicking range')
-            player.range += 25
+            blow_range += 25
+            leaf_money -= range_btn.cost
             range_btn.cost += 100
-        elif 105<pos[0]<205:
+        elif 105<pos[0]<205 and leaf_money>= power_btn.cost:
             print(f'{pos}, clicking power')
-            player.blow_power += 2
-        elif 210<pos[0]<310:
+            leaf_money -= power_btn.cost
+            blow_power += 2
+            power_btn.cost += 100
+        elif 210<pos[0]<310 and leaf_money>= add_leaf_btn.cost:
             print(f'{pos}, clicking add leaf')
             leaf_num += 1
+            leaf_money -= add_leaf_btn.cost
+            add_leaf_btn.cost += 100
+            
         
 
     
@@ -129,9 +154,11 @@ def draw():
     screen.clear()
     screen.blit('bg', (0, 0))
     range_btn.draw()
-    screen.draw.text(str(range_btn.cost, center=(52.5, HEIGHT-20),fontsize=30)
+    screen.draw.text(f'${range_btn.cost}', center=(50, HEIGHT-10),fontsize=35)
     power_btn.draw()
+    screen.draw.text(f'${power_btn.cost}', center=(155, HEIGHT-10),fontsize=35)
     add_leaf_btn.draw()
+    screen.draw.text(f'${add_leaf_btn.cost}', center=(260, HEIGHT-10),fontsize=35)
 
     player.draw()
     for leaf in leaves:
