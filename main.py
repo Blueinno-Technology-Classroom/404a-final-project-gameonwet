@@ -15,7 +15,6 @@ leaf_CD = 0
 prev_mouse_pos = [0, 0]
 
 leaf_num = 15
-
 blow_range = 150
 blow_power = 10
 
@@ -32,8 +31,7 @@ def update():
     if leaf_CD >= 240:
         for i in range(leaf_num):
             leaf = Actor("leaf")
-            leaf.weight = 1
-
+            leaf.scale = random.randint(5, 9) / 10
             leaf.x = random.randint(0, WIDTH)
             leaf.y = random.randint(0, HEIGHT)
             leaf.pe = 0
