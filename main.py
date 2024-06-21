@@ -22,21 +22,21 @@ blow_power = 10
 leaf_money = 0
 
 range_btn = Actor("range_btn")
-range_btn.scale = 0.1
-range_btn.bottom = HEIGHT + 15
+# range_btn.scale = 0.1
+range_btn.bottom = HEIGHT
 range_btn.left = 0
 range_btn.cost = 100
 
 power_btn = Actor("power_btn")
-power_btn.scale = 0.1
+# power_btn.scale = 0.1
 power_btn.left = 105
-power_btn.bottom = HEIGHT + 16
+power_btn.bottom = HEIGHT
 power_btn.cost = 100
 
 add_leaf_btn = Actor("add_leaf_btn")
-add_leaf_btn.scale = 0.1
+# add_leaf_btn.scale = 0.1
 add_leaf_btn.left = 210
-add_leaf_btn.bottom = HEIGHT + 15
+add_leaf_btn.bottom = HEIGHT
 add_leaf_btn.cost = 100
 
 
@@ -46,6 +46,7 @@ def update():
     global leaf_money
     global blow_range
     global blow_power
+    global leaf_num
 
 
     leaf_CD += 1
@@ -112,10 +113,14 @@ def on_mouse_down(pos):
     if HEIGHT-50<pos[1]<HEIGHT:
         if 0<pos[0]<100:
             print(f'{pos}, clicking range')
-        elif 100<pos[0]<200:
+            player.range += 25
+            range_btn.cost += 100
+        elif 105<pos[0]<205:
             print(f'{pos}, clicking power')
-        elif 200<pos[0]<300:
+            player.blow_power += 2
+        elif 210<pos[0]<310:
             print(f'{pos}, clicking add leaf')
+            leaf_num += 1
         
 
     
@@ -124,6 +129,7 @@ def draw():
     screen.clear()
     screen.blit('bg', (0, 0))
     range_btn.draw()
+    screen.draw.text(str(range_btn.cost, center=(52.5, HEIGHT-20),fontsize=30)
     power_btn.draw()
     add_leaf_btn.draw()
 
