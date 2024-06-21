@@ -31,7 +31,7 @@ def update():
     leaf_CD += 1
     if leaf_CD >= 240:
         for i in range(leaf_num):
-            leaf = Actor("gold_leaf")
+            leaf = Actor("leaf")
             leaf.weight = 1
 
             leaf.x = random.randint(0, WIDTH)
@@ -62,15 +62,19 @@ def update():
         if leaf.right <= 0:
             leaves.remove(leaf)
             leaf_money += 1
+            break
         if leaf.left >= WIDTH:
             leaves.remove(leaf)
             leaf_money += 1
+            break
         if leaf.bottom <= 0:
             leaves.remove(leaf)
             leaf_money += 1
+            break
         if leaf.top >= HEIGHT:
             leaves.remove(leaf)
             leaf_money += 1
+            break
 
 
 def on_mouse_move(pos):
