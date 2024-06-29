@@ -21,19 +21,19 @@ blow_power = 10
 
 leaf_money = 0
 
-range_btn = Actor("range_btn")
+range_btn = Actor("range_btn_off")
 # range_btn.scale = 0.1
 range_btn.bottom = HEIGHT
 range_btn.left = 0
 range_btn.cost = 100
 
-power_btn = Actor("power_btn")
+power_btn = Actor("power_btn_off")
 # power_btn.scale = 0.1
 power_btn.left = 105
 power_btn.bottom = HEIGHT
 power_btn.cost = 100
 
-add_leaf_btn = Actor("add_leaf_btn")
+add_leaf_btn = Actor("add_leaf_btn_off")
 # add_leaf_btn.scale = 0.1
 add_leaf_btn.left = 210
 add_leaf_btn.bottom = HEIGHT
@@ -49,19 +49,19 @@ def update():
     global leaf_num
 
     if leaf_money >= range_btn.cost:
-        range_btn.iamge = 'range_btn'
+        range_btn.image = 'range_btn'
     else:
-        range_btn.iamge = 'range_btn_off'
+        range_btn.image = 'range_btn_off'
     
     if leaf_money >= power_btn.cost:
-        power_btn.iamge = 'power_btn'
+        power_btn.image = 'power_btn'
     else:
-        power_btn.iamge = 'power_btn_off'
+        power_btn.image = 'power_btn_off'
         
     if leaf_money >= add_leaf_btn.cost:
-        add_leaf_btn.iamge = 'add_leaf_btn'
+        add_leaf_btn.image = 'add_leaf_btn'
     else:
-        add_leaf_btn.iamge = 'add_leaf_btn_off'
+        add_leaf_btn.image = 'add_leaf_btn_off'
         
     
     leaf_CD += 1
@@ -132,7 +132,7 @@ def on_mouse_down(pos):
     if HEIGHT-50<pos[1]<HEIGHT:
         if 0<pos[0]<100 and leaf_money>= range_btn.cost:
             print(f'{pos}, clicking range')
-            blow_range += 25
+            blow_range += 15
             leaf_money -= range_btn.cost
             range_btn.cost += 100
         elif 105<pos[0]<205 and leaf_money>= power_btn.cost:
@@ -142,7 +142,7 @@ def on_mouse_down(pos):
             power_btn.cost += 100
         elif 210<pos[0]<310 and leaf_money>= add_leaf_btn.cost:
             print(f'{pos}, clicking add leaf')
-            leaf_num += 1
+            leaf_num += 5
             leaf_money -= add_leaf_btn.cost
             add_leaf_btn.cost += 100
             
@@ -154,11 +154,11 @@ def draw():
     screen.clear()
     screen.blit('bg', (0, 0))
     range_btn.draw()
-    screen.draw.text(f'${range_btn.cost}', center=(50, HEIGHT-10),fontsize=35)
+    screen.draw.text(f'${range_btn.cost}', center=(50, HEIGHT-15),fontsize=32)
     power_btn.draw()
-    screen.draw.text(f'${power_btn.cost}', center=(155, HEIGHT-10),fontsize=35)
+    screen.draw.text(f'${power_btn.cost}', center=(155, HEIGHT-15),fontsize=32)
     add_leaf_btn.draw()
-    screen.draw.text(f'${add_leaf_btn.cost}', center=(260, HEIGHT-10),fontsize=35)
+    screen.draw.text(f'${add_leaf_btn.cost}', center=(260, HEIGHT-15),fontsize=32)
 
     player.draw()
     for leaf in leaves:
